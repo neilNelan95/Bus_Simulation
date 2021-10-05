@@ -14,6 +14,8 @@ public class BusStop {
 	static int passengerArriveFreqLow;
 	static int passengerArriveFreqHigh;
 	
+	//Test Comment
+	
 	
 
 	public BusStop(int id, int frequencyLow, int frequencyHigh, int totalStops) {
