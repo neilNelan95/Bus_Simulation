@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.concurrent.ThreadLocalRandom;
 
 public class BusApp {
 	
@@ -57,7 +58,7 @@ public class BusApp {
 		}
 		
 		
-		busStops = new BusStop[numStops];
+		busStops = new BusStop[numStops]; // This needs to happen before buses are initialized
 		
 		
 		//Creation of Buses
@@ -65,14 +66,21 @@ public class BusApp {
 		
 		initializeStops(numStops);
 		
-		busStops[0].addToQueue();
-		busStops[1].addToQueue();
-		
 		
 		
 		buses = new ArrayList<>();
 		
-		initializeBuses();
+		initializeBuses(); //We create an array list of buses which houses unique bus objects.
+		//We will take copies of these buses and place them within each stop.
+		
+		//The arraylist will be disregarded afterwards.
+		
+		populateStops();
+		
+		for (int i = 0; i < numStops; i ++) {
+			
+			busStops[i].printInfo();
+		}
 		
 		
 		
@@ -108,7 +116,7 @@ public class BusApp {
 		while (i < numBuses) {
 			
 			buses.add(i, new Bus(i, busStops));
-			buses.get(i).printInfo();
+			//buses.get(i).printInfo();
 			i++;
 			
 		}
@@ -116,7 +124,29 @@ public class BusApp {
 	}
 	
 	
-	public void populateStops() {
+	public static void populateStops() {
+		
+		for (int i = 0; i < numBuses; i++) {
+			
+			Bus bus = buses.get(i);
+			
+			while (bus.isParked == false) {
+				
+				int initialStop = ThreadLocalRandom.current().nextInt(0, numStops); //Generate a random stop ID
+				
+					if (busStops[i].getCurrentBus() == null) { //If stop doesn't have a bus, park it there, otherwise keep looking for an empty stop.
+						
+						busStops[i].setCurrentBus(bus);
+						bus.setIsParked(true);
+						
+					}
+					
+					else bus.setIsParked(false);
+				
+			}
+			
+			
+		}
 		
 		
 	}

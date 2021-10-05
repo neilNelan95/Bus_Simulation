@@ -7,10 +7,16 @@ import java.util.concurrent.TimeUnit;
 public class BusStop {
 	
 	static Bus currentBus;
+	
+
+
 	static int numRiders;
 	static int stopId;
 	static int nextStopId;
 	static int prevStopId;
+	
+	
+	
 	static int passengerArriveFreqLow;
 	static int passengerArriveFreqHigh;
 	
@@ -33,11 +39,24 @@ public class BusStop {
 		
 		if (id == 0) prevStopId = 14;
 		
+		else prevStopId = id - 1;
+		
 			
 		
 		passengerArriveFreqLow = frequencyLow;
 		passengerArriveFreqHigh = frequencyHigh;
 		
+	}
+	
+	public static Bus getCurrentBus() {
+		return currentBus;
+	}
+
+
+
+
+	public static void setCurrentBus(Bus currentBus) {
+		BusStop.currentBus = currentBus;
 	}
 
 

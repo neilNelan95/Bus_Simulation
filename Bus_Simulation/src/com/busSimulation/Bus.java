@@ -85,11 +85,11 @@ public class Bus {
 		Bus.numPassengers = numPassengers;
 	}
 
-	public static boolean isParked() {
+	public static boolean getisParked() {
 		return isParked;
 	}
 
-	public static void setParked(boolean isParked) {
+	public static void setIsParked(boolean isParked) {
 		Bus.isParked = isParked;
 	}
 
