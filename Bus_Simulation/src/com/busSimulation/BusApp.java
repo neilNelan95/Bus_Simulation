@@ -77,11 +77,11 @@ public class BusApp {
 		
 		populateStops();
 		
-		for (int i = 0; i < numStops; i ++) {
-			
-			busStops[i].printInfo();
-		}
-		
+		/*
+		 * for (int i = 0; i < numStops; i ++) {
+		 * 
+		 * busStops[i].printInfo(); }
+		 */
 		
 		
 		
