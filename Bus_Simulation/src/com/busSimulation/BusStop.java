@@ -6,11 +6,13 @@ import java.util.concurrent.TimeUnit;
 
 public class BusStop {
 	
-	static Bus currentBus;
+	public static Bus currentBus;
 	
 
 
 	static int numRiders;
+	
+	
 	static int stopId;
 	static int nextStopId;
 	static int prevStopId;
@@ -31,15 +33,17 @@ public class BusStop {
 		stopId = id;
 		
 		
-		if (id == totalStops -1) nextStopId = 0; //Edge (no pun intended) cases
-		
-		else nextStopId = id + 1;
-		
-		
-		
-		if (id == 0) prevStopId = 14;
-		
-		else prevStopId = id - 1;
+		/*
+		 * if (id == totalStops -1) nextStopId = 0; //Edge (no pun intended) cases
+		 * 
+		 * else nextStopId = id + 1;
+		 * 
+		 * 
+		 * 
+		 * if (id == 0) prevStopId = 14;
+		 * 
+		 * else prevStopId = id - 1;
+		 */
 		
 			
 		
@@ -47,6 +51,8 @@ public class BusStop {
 		passengerArriveFreqHigh = frequencyHigh;
 		
 	}
+	
+	
 	
 	public static Bus getCurrentBus() {
 		return currentBus;
@@ -67,12 +73,6 @@ public class BusStop {
 	}
 
 
-
-
-	public static void setStopId(int stopId) {
-		BusStop.stopId = stopId;
-	}
-	
 	public void printInfo () { // This is basically done
 		
 		System.out.println("Stop " + stopId + ": " + numRiders + " people waiting in queue.");
@@ -83,7 +83,7 @@ public class BusStop {
 		
 		else {
 			
-			System.out.println("Stop " + stopId + ": bus" + currentBus.getBusId() + " is parked.");
+			System.out.println("Stop " + stopId + ": bus " + currentBus.getBusId() + " is parked.");
 			
 		}
 		
@@ -93,7 +93,7 @@ public class BusStop {
 	}
 	
 	
-	public void addToQueue() {
+	public void addToQueue() { //This method will periodically add passengers to the rider queue.
 		
 		
 		

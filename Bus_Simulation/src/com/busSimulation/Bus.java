@@ -8,34 +8,25 @@ public class Bus {
 	static int numPassengers;
 	static boolean isParked;
 	static int currentStop;
-	
-	
-	public static int getCurrentStop() {
-		return currentStop;
-	}
-
-	public static void setCurrentStop(int currentStop) {
-		Bus.currentStop = currentStop;
-	}
-
-
 	static int previousStop;
 	static int nextStop;
 	static int travelSpeed;
 	static int loadSpeed;
 	
-	static BusStop[] busLoop;
 	
 	
 
-	public Bus(int id, BusStop[] loop) {
+	public Bus(int id) {
 		busId = id;
 		numPassengers = 0;
 		isParked = false;
 		
-		busLoop = loop;
 		
 	}
+	
+	
+	
+	
 	
 	public void loadBus (int passengerQueue) {
 		
@@ -111,6 +102,15 @@ public class Bus {
 	}
 	
 	
+	public static int getCurrentStop() {
+		return currentStop;
+	}
+
+	public static void setCurrentStop(int currentStop) {
+		Bus.currentStop = currentStop;
+	}
+	
+	
 	public void printInfo() {
 		
 		System.out.println("Bus " + busId + ": " + numPassengers + " on the bus");
@@ -118,6 +118,15 @@ public class Bus {
 		if (isParked == true) System.out.println("Bus " + busId + ": currently at stop " + currentStop);
 		
 		else System.out.println("Bus " + busId + ": traveling from stop " + previousStop + " to stop " + nextStop);
+		
+	}
+	
+	
+	public String toString () {
+		
+		String blah = busId + " / " + numPassengers;
+		
+		return blah;
 		
 	}
 	
