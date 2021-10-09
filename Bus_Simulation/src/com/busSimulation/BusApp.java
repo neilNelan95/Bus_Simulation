@@ -27,7 +27,6 @@ public class BusApp {
 	// Creation of Bus array. Size is set by numStops attribute.
 	
 	
-	static BusLoop busLoop;
 	
 
 	public static void main(String[] args) {
@@ -52,9 +51,7 @@ public class BusApp {
 		
 		
 		
-		busLoop = new BusLoop (numStops,travelTime,numBuses,boardingSpeed, queueAddFreqLow, queueAddFreqHigh);
 		
-		Bus[] myBuses = busLoop.getBuses();
 		
 		//System.out.println(myBuses[1].getBusId());
 		//System.out.println(myBuses[4].getBusId());
