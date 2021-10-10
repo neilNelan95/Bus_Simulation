@@ -23,8 +23,68 @@ public class BusApp {
 										// queue
 
 	static int runTime;// Runtime in minutes
+	
+	static long startTime;
+	
+	
 
-	// Creation of Bus array. Size is set by numStops attribute.
+	static int currentTime;
+	// Creation of Bus arraylist. Size is set by numStops attribute.
+	
+	
+	private static ArrayList<BusStop> stops;
+	private static ArrayList<Bus> buses;
+	
+	public static void initialize(int numBuses, int numStops, int travel, int boardTime, int arrivalLow, int arrivalHigh, int totalTime) {
+		
+		stops = new ArrayList<BusStop>();
+		buses = new ArrayList<Bus>();
+		
+		startTime = System.nanoTime();
+		
+		Bus myBus;
+		BusStop myStop;
+		
+		
+		for (int i = 0; i < numStops; i++) {
+			myStop = new BusStop(i, arrivalLow, arrivalHigh);
+			stops.add(myStop);
+		}
+		
+		
+		
+		for (int i = 0; i < numBuses; i++) {
+			
+			myBus = new Bus(i, (numStops/numBuses)*i, travel, boardTime, stops);
+			buses.add(myBus);
+			
+			
+		}
+		
+		
+		
+		
+		
+		
+	}
+	
+	
+	public void printBuses (File file) {
+		
+	}
+	
+	public static void consoleBusesAndStops() {
+		
+		for (int i = 0; i < stops.size(); i++ ) {
+			
+			System.out.println(stops.get(i).stopInfo());
+		}
+		
+		for (int i = 0; i < buses.size(); i++) {
+			System.out.println(buses.get(i).busInfo());
+		}
+		
+	}
 	
 	
 	
@@ -49,62 +109,39 @@ public class BusApp {
 			e.printStackTrace();
 		}
 		
+		initialize(numBuses, numStops, travelTime, boardingSpeed, queueAddFreqLow, queueAddFreqHigh, runTime);
 		
+		System.out.println("Application has started.");
 		
-		
-		
-		//System.out.println(myBuses[1].getBusId());
-		//System.out.println(myBuses[4].getBusId());
+		for (int i = 0; i < stops.size(); i++) {
+			new Thread(stops.get(i)).start();
+		}
 		 
+		for (int i = 0; i < buses.size(); i++) {
+			new Thread(buses.get(i)).start();
+		}
+		
+		
+		while(currentTime < runTime) {
+			
+			try {
+				Thread.sleep(10000);
+				consoleBusesAndStops();
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+		}
 
 	}
 	
-	
-	
-	
 
-	 
 	
-
-	/*
-	 * public static void populateStops() { //Populate all available buses at random
-	 * stops in the queue.
-	 * 
-	 * 
-	 * int i = 0;
-	 * 
-	 * while (i < buses.size()) {
-	 * 
-	 * Bus bus = buses.get(i); //Pick bus from array list
-	 * 
-	 * boolean busIsPlaced = false;
-	 * 
-	 * while (busIsPlaced == false) {
-	 * 
-	 * int initialStop = ThreadLocalRandom.current().nextInt(0, numStops); //
-	 * Generate a random stop ID
-	 * 
-	 * //System.out.println("random stop generated: " + initialStop);
-	 * 
-	 * if (!(busStops[initialStop].getCurrentBus() instanceof Bus)) { // If stop
-	 * doesn't have a bus, park it there, // otherwise keep looking for an empty
-	 * stop.
-	 * 
-	 * busStops[initialStop].setCurrentBus(bus); System.out.println(); busIsPlaced =
-	 * true; i++;
-	 * 
-	 * 
-	 * }
-	 * 
-	 * else bus.setIsParked(false);
-	 * 
-	 * }
-	 * 
-	 * 
-	 * 
-	 * }
-	 * 
-	 * }
-	 */
-
+	
+	
+	
 }
+
+
+
